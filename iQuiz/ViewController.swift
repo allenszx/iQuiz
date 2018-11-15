@@ -72,6 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
       self.url = uiAlert!.textFields![0].text!
       self.loadData()
     }))
+    uiAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
     self.present(uiAlert, animated: true, completion: nil)
   }
   
@@ -96,6 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
       do {
         let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
         if let jsonCourses = json as? [Any] {
+          self.courses = []
           for course in jsonCourses {
             self.courses.append(Course(json: course as! [String : Any]))
             DispatchQueue.main.async {
