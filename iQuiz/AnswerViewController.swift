@@ -18,6 +18,7 @@ class AnswerViewController: UIViewController {
   var isCorrect = false
   var correctAnswer = ""
   var correctNumber = 0
+  var totalNumber = 0
   override func viewDidLoad() {
     super.viewDidLoad()
     if !isCorrect {
@@ -40,10 +41,12 @@ class AnswerViewController: UIViewController {
     if segue.identifier == "toFinish" {
       let finishVC = segue.destination as! FinishViewController
       finishVC.correctNumber = correctNumber
+      finishVC.totalNumber = totalNumber
     } else if segue.identifier == "backQuestion" {
       let questionVC = segue.destination as! QuestionViewController
       questionVC.questions = questions
       questionVC.correctNumber = correctNumber
+      questionVC.totalNumber = totalNumber
     }
   }
 }

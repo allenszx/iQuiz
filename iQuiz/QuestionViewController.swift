@@ -14,6 +14,7 @@ class QuestionViewController: UIViewController {
   var questions : [Question] = []
   var currentSelect = 0
   var correctNumber = 0
+  var totalNumber = 0
   
   @IBOutlet weak var questionLabel: UILabel!
   
@@ -37,11 +38,12 @@ class QuestionViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "toAnswer" {
       let answerVC = segue.destination as! AnswerViewController
-      answerVC.isCorrect = currentSelect ==  selectQuestion?.correctAnswer
-      answerVC.correctAnswer = (selectQuestion?.answers[(selectQuestion?.correctAnswer)!])!
-      answerVC.question = (selectQuestion?.question)!
+      answerVC.isCorrect = String(currentSelect + 1) ==  selectQuestion?.answer
+      answerVC.correctAnswer = (selectQuestion?.answers[Int((selectQuestion?.answer)!)! - 1])!
+      answerVC.question = (selectQuestion?.text)!
       answerVC.questions = questions
       answerVC.correctNumber = correctNumber
+      answerVC.totalNumber = totalNumber
     }
   }
   
@@ -49,7 +51,7 @@ class QuestionViewController: UIViewController {
     super.viewDidLoad()
     
     selectQuestion = questions.removeFirst()
-    questionLabel.text = selectQuestion!.question
+    questionLabel.text = selectQuestion!.text
     optionA.setTitle(selectQuestion!.answers[0], for: .normal)
     optionB.setTitle(selectQuestion!.answers[1], for: .normal)
     optionC.setTitle(selectQuestion!.answers[2], for: .normal)

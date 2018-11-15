@@ -10,6 +10,7 @@ import UIKit
 
 class FinishViewController: UIViewController {
   var correctNumber = 0
+  var totalNumber = 0
   @IBOutlet weak var result: UILabel!
   @IBOutlet weak var endDesc: UILabel!
   override func viewDidLoad() {
